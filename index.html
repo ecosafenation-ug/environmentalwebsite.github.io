@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Safe Nation | Uganda</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary-green: #2e7d63;
+            --light-green: #e8f2f5;
+            --accent-gold: #FBC02D;
+            --text-dark: #333333;
+            --text-light: #555555;
+            --white: #ffffff;
+            --bg-gray: #f9f9f9;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.363);
+            --radius: 8px;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* --- SMOOTH SCROLLING (Crucial for this design) --- */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-dark);
+            background-color: var(--white);
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            background-color: var(--primary-green);
+            color: var(--white);
+            position: fixed; /* Stays at top while scrolling */
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; gap: 10px; }
+        .logo span { color: var(--accent-gold); }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover { background-color: rgba(255,255,255,0.2); }
+
+        .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+        /* --- SECTION STYLING --- */
+        section {
+            padding: 100px 0; /* Generous padding for scrolling sections */
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Alternating Backgrounds for visual separation */
+        section:nth-child(even) { background-color: var(--bg-gray); }
+        
+        h2 {
+            font-size: 2.2rem;
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-gold);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        p { margin-bottom: 1rem; color: var(--text-light); font-size: 1.1rem; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto; }
+
+        /* --- HOME / HERO SECTION --- */
+        #home {
+            height: 100vh; /* Full screen height */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://visitkampala.kcca.go.ug/user_files/nZpI0cjDS1EV.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0;
+        }
+
+        #home h1 { font-size: 3.5rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        #home p { color: #f0f0f0; font-size: 1.3rem; margin-bottom: 2rem; }
+        #home p::after { display: none; }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-gold);
+            color: #333;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: scale(1.05); }
+
+        /* --- GRIDS --- */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            text-align: left;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .card:hover { transform: translateY(-5px); }
+        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; margin-bottom: 1rem; }
+        .card h3 { color: var(--primary-green); margin-bottom: 0.5rem; }
+        .card p { text-align: left; font-size: 1rem; margin-bottom: 0; color: var(--text-light); }
+                
+        /* --- WEATHER HERO SECTION --- */
+        .weather-hero {
+            background: linear-gradient(120deg, #d9eae5 0%, #c2dfd6 100%);
+            padding: 2rem 0 2rem;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-gold);
+        }
+
+        .weather-hero h1 {
+            font-size: 2.4rem;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .weather-hero p {
+            font-size: 1.1rem;
+            color: #2c5a4b;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- WEATHER GRID (TWO CITIES) --- */
+        .weather-dashboard {
+            padding: 3rem 0 4rem;
+        }
+
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .city-card {
+            background: var(--white);
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s;
+            backdrop-filter: blur(0px);
+            border: 1px solid rgba(46,125,99,0.2);
+        }
+
+        .city-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
+        }
+
+        .city-header {
+            background: var(--primary-green);
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+
+        .city-header h2 {
+            font-size: 1.9rem;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.5px;
+        }
+
+        .city-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .weather-main {
+            padding: 1.8rem;
+            text-align: center;
+        }
+
+        .temp-big {
+            font-size: 3.8rem;
+            font-weight: 800;
+            color: var(--primary-green);
+            line-height: 1;
+            margin: 0.2rem 0;
+        }
+
+        .weather-desc {
+            font-size: 1.2rem;
+            text-transform: capitalize;
+            font-weight: 500;
+            color: var(--text-dark);
+            background: #ecf6f2;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            margin: 0.8rem 0;
+        }
+
+        .weather-icon {
+            font-size: 3.2rem;
+            margin: 0.2rem 0;
+        }
+
+        .weather-details {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2ece8;
+        }
+
+        .detail-item {
+            flex: 1;
+            background: #f8fbfa;
+            border-radius: 20px;
+            padding: 0.7rem 0.3rem;
+            text-align: center;
+        }
+
+        .detail-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #6b8f82;
+        }
+
+        .detail-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+
+        /* Forecast section */
+        .forecast-title {
+            font-size: 1.6rem;
+            color: var(--primary-green);
+            margin: 2rem 0 1.2rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .forecast-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .forecast-day {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 1rem 0.8rem;
+            min-width: 90px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e0ece7;
+            transition: all 0.2s;
+        }
+
+        .forecast-day:hover {
+            background: #fef9e6;
+            transform: scale(1.02);
+        }
+
+        .forecast-date {
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--primary-green);
+        }
+
+        .forecast-icon {
+            font-size: 1.8rem;
+            margin: 0.4rem 0;
+        }
+
+        .forecast-temp {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .forecast-temp span {
+            color: #e67e22;
+        }
+
+        /* climate info box */
+        .climate-note {
+            background: var(--light-green);
+            border-radius: 24px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .climate-note h3 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-gold);
+            color: #333;
+            padding: 10px 26px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: 0.2s;
+            margin-top: 0.5rem;
+        }
+
+        .btn:hover {
+            background-color: #e0a800;
+            transform: scale(1.02);
+        }
+
+        /* --- POLLUTION SPECIFIC --- */
+        .pollution-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .pollution-col {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-top: 5px solid var(--primary-green);
+        }
+
+        .pollution-col.cause { border-color: #e74c3c; }
+        .pollution-col.impact { border-color: #e67e22; }
+        .pollution-col.solution { border-color: #27ae60; }
+
+        .pollution-col h3 { text-align: center; margin-bottom: 1rem; font-size: 1.5rem; }
+        .pollution-col ul { padding-left: 20px; }
+        .pollution-col li { margin-bottom: 0.8rem; font-size: 1.1rem; }
+
+        /* --- CONTACT --- */
+        .contact-box {
+            background: white;
+            max-width: 600px;
+            margin: 3rem auto 0;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .form-group { margin-bottom: 1rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; }
+        
+        /* --- FOOTER --- */
+        footer { background-color: #222; color: #aaa; text-align: center; padding: 2rem 0; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-wrapper { flex-direction: column; align-items: flex-start; }
+            nav ul { display: none; width: 100%; margin-top: 1rem; flex-direction: column; }
+            nav ul.show { display: flex; }
+            .menu-toggle { display: block; position: absolute; right: 1rem; top: 1.2rem; }
+            #home h1 { font-size: 2.5rem; }
+            .pollution-flex { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fixed Navigation Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo">🌿 Eco Safe <span>Nation</span></div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <nav>
+                <ul id="nav-list">
+                    <!-- These links jump to the ID sections below -->
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#weather">🌤️ Uganda Weather</a></li>
+                    <li><a href="index.html#resources">Resources</a></li>
+                    <li><a href="index.html#utilization">Utilization</a></li>
+                    <li><a href="index.html#community">Community</a></li>
+                    <li><a href="index.html#air">Air</a></li>
+                    <li><a href="index.html#water">Water</a></li>
+                    <li><a href="index.html#land">Land</a></li>
+                    <li><a href="index.html#FAQs">FAQs</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 1. HOME SECTION (Full Screen) -->
+    <section id="home">
+        <div class="container">
+            <h1>Eco Safe Nation</h1>
+            <p>Protecting Uganda's Environment Through Awareness, Efficiency, and Community Action.</p>
+            <h2>About Us</h2>
+            <p>This community was created with the aim of promoting awareness of local resources, encourage efficient resource utilisation, support community development, and educate the people of the local community on evnvironmental degradation(pollution).</p>
+            <a href="#resources" class="btn">Read more</a>
+        </div>
+    </section>
+    
+    <!-- 2. WEATHER SECTION -->
+    <section id="weather">
+    <div class="container">
+        <h2>Uganda Weather & Climate<h2>
+        <p>Uganda is a very beautiful country found in the Eastern part of africa and experiences a very unique climatic type.</p>
+    </div>
+            <!-- 5-day forecast section (dynamic for both cities, but we'll show for Kampala + Gulu combined in a compact way) -->
+            <div class="forecast-title">📆 3-Day Weather Outlook</div>
+            <div id="forecastContainer" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
+                <!-- Kampala forecast & Gulu forecast side by side -->
+            </div>
+
+            <!-- Climate info card -->
+            <div class="climate-note">
+                <h3>🌦️ Uganda's Unique Climate</h3>
+                <p>Uganda enjoys a tropical climate with two rainy seasons (March-May & September-November). Average temperatures range from 18°C to 28°C. Due to climate change, unpredictable heavy rainfall and dry spells are becoming more common. Eco Safe Nation promotes climate adaptation through reforestation and sustainable water management.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. RESOURCES SECTION -->
+    <section id="resources">
+        <div class="container">
+            <h2>Local Resources</h2>
+            <p>Uganda is the "Pearl of Africa," rich in natural capital that drives our economy and survival.</p>
+            
+            <div class="grid-3">
+                <div class="card">
+                    <img src="data:image/jpeg;base64,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" alt="Water">
+                    <h3>Water Resources</h3>
+                    <p>Lake Victoria, the source of the River Nile, and vast wetlands regulate our weather and provide water for life.</p>
+                </div>
+                <div class="card">
+                    <img src="data:image/jpeg;base64,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" alt="Forest">
+                    <h3>Forests & Wildlife</h3>
+                    <p>From Mabira to Bwindi, our forests are home to gorillas and chimpanzees, acting as vital lungs for the planet.</p>
+                </div>
+                <div class="card">
+                    <img src="data:image/jpeg;base64,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" alt="Soil">
+                    <h3>Fertile Soils</h3>
+                    <p>Our volcanic soils support agriculture, feeding the nation through crops like Matooke, Coffee, and Maize.</p>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrpRljEUWkg0lX2ZIRkFMGYJhZOMmjrOX6Ww&s" alt="Minerals">
+                    <h3>Minerals</h3>
+                    <p>Copper, cobalt, gold, and the recently discovered oil reserves in the Albertine Graben.</p>
+                    </div>
+                <div class="card">
+                    <img src="data:image/jpeg;base64,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">
+                    <h3>Biodiversity</h3>
+                    <p>Uganda is a global biodiversity hotspot, hosting over 18,783 recorded species of flora and fauna, including 53.9% of the world's mountain gorillas and over 1,000 bird species (50% of Africa’s total)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. UTILIZATION SECTION -->
+    <section id="utilization">
+        <div class="container">
+            <h2>Efficient Utilization</h2>
+            <p>Resources are finite. We must use them wisely today so they exist for our children tomorrow.Resource utilization in Uganda focuses on harnessing abundant natural, agricultural, and human resources to drive economic growth and improve livelihoods, though it faces significant challenges regarding sustainability and efficiency. While the country is rich in water bodies, fertile soil, and minerals, many resources are underutilized or overexploited due to inefficient practices, leading to calls for better governance and sustainable management.</p>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Renewable Energy</h3>
+                    <p>Shifting from charcoal to solar power and biogas protects our forests and reduces indoor air pollution.</p>
+                </div>
+                <div class="card">
+                    <h3>Sustainable Farming</h3>
+                    <p>Using organic manure and crop rotation maintains soil health without damaging the land with harsh chemicals.</p>
+                </div>
+                <div class="card">
+                    <h3>Water Harvesting</h3>
+                    <p>Collecting rainwater reduces the strain on Lake Victoria and ensures water availability during dry seasons.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. COMMUNITY SECTION -->
+    <section id="community">
+        <div class="container">
+            <h2>Community Development</h2>
+            <p>Environmental protection starts at the grassroots level with the people of Uganda. Community development in Uganda focuses on empowering local communities to identify needs, utilize resources, and create sustainable, citizen-driven solutions for improved quality of life. Key initiatives include strengthening local governance, promoting economic empowerment (e.g., SACCOs), improving agriculture, and fostering social protection, largely coordinated by Community Development Officers (CDOs).</p>
+            
+            <div style="display:flex; gap:2rem; flex-wrap:wrap; align-items:center; margin-top:3rem;">
+                <div style="flex:1; min-width:300px;">
+                    <img src="data:image/jpeg;base64,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" alt="Community" style="width:100%; border-radius:8px; box-shadow:var(--shadow);">
+                </div>
+                <div style="flex:1; min-width:300px; text-align:left;">
+                    <h3 style="color:var(--primary-green); margin-bottom:1rem;">How We Help</h3>
+                    <p style="text-align:left; margin-bottom:1rem;">We empower Ugandans to become guardians of their environment.</p>
+                    <ul style="padding-left:20px; line-height:1.8; color:var(--text-light);">
+                        <li><strong>Youth Conservation Clubs:</strong> Educating the next generation in primary and secondary schools.</li>
+                        <li><strong>Women’s Green Groups:</strong> Teaching skills like briquette making to reduce charcoal dependence.</li>
+                        <li><strong>Clean-up Campaigns:</strong> Regular cleaning of towns and drainage channels in Kampala and municipalities.</li>
+                        <li><strong>Eco-Tourism:</strong> Helping locals benefit financially from wildlife conservation.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. AIR POLLUTION SECTION -->
+    <section id="air">
+        <div class="container">
+            <h2>Air Pollution</h2>
+            <p>The invisible danger affecting the health of Ugandans in cities and villages. In accordance with the WHO's guidelines, the air quality in Uganda is considered unsafe with the most recent data indicating the country's annual mean concentration of PM2. 5 is 50 µg/m3 which exceeds the recommended maximum of 10 µg/m3 </p>
+
+            <div class="pollution-flex">
+                <div class="pollution-col cause">
+                    <h3>⚠️ Causes</h3>
+                    <ul>
+                        <li>Old vehicle emissions (boda-bodas) in Kampala.</li>
+                        <li>Burning of charcoal and firewood.</li>
+                        <li>Open burning of plastic waste.</li>
+                        <li>Dust from construction and road works.</li>
+                    </ul>
+                </div>
+                <div class="pollution-col impact">
+                    <h3>💥 Impacts</h3>
+                    <ul>
+                        <li>High rates of asthma and respiratory infections.</li>
+                        <li>Contributes to climate change.</li>
+                        <li>Reduced life expectancy.</li>
+                        <li>Smog reduces visibility.</li>
+                    </ul>
+                </div>
+                <div class="pollution-col solution">
+                    <h3>✅ Solutions</h3>
+                    <ul>
+                        <li>Promote electric vehicles and public transport.</li>
+                        <li>Use energy-efficient cookstoves.</li>
+                        <li>Enforce laws against burning trash.</li>
+                        <li>Plant trees along city streets.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. WATER POLLUTION SECTION -->
+    <section id="water">
+        <div class="container">
+            <h2>Water Pollution</h2>
+            <p>Threatening the purity of Lake Victoria, the Nile, and our wetlands. Water pollution in Uganda is a severe crisis, with 47% of key water sources (boreholes, springs) contaminated and unsafe, causing over 70% of reported diseases like cholera and typhoid. Major threats include industrial waste, agricultural runoff, untreated sewage, and rampant plastic pollution, primarily affecting Lake Victoria and urban water bodies. </p>
+
+            <div class="pollution-flex">
+                <div class="pollution-col cause">
+                    <h3>⚠️ Causes</h3>
+                    <ul>
+                        <li>Industrial waste dumped into rivers.</li>
+                        <li>Runoff of fertilizers from farms.</li>
+                        <li>Improper disposal of plastics (Kaveera).</li>
+                        <li>Silting from deforested riverbanks.</li>
+                    </ul>
+                </div>
+                <div class="pollution-col impact">
+                    <h3>💥 Impacts</h3>
+                    <ul>
+                        <li>Waterborne diseases (Cholera, Typhoid).</li>
+                        <li>Death of fish and aquatic life.</li>
+                        <li>Expensive water treatment costs.</li>
+                        <li>Loss of tourism revenue.</li>
+                    </ul>
+                </div>
+                <div class="pollution-col solution">
+                    <h3>✅ Solutions</h3>
+                    <ul>
+                        <li>Protect wetlands as natural filters.</li>
+                        <li>Ban single-use plastics.</li>
+                        <li>Treat industrial waste before release.</li>
+                        <li>Community riverbank restoration.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. LAND POLLUTION SECTION -->
+    <section id="land">
+        <div class="container">
+            <h2>Land & Soil Pollution</h2>
+            <p>Degrading the fertile ground we rely on for food and shelter. Land and soil pollution in Uganda is a severe crisis, with approximately 46% of land degraded due to deforestation, poor farming practices, overgrazing, and uncontrolled industrial/plastic waste dumping. This degradation, driven by high population growth and urbanization, reduces soil fertility, decreases agricultural productivity, and threatens food security, costing the economy roughly 17% of GDP.</p>
+
+            <div class="pollution-flex">
+                <div class="pollution-col cause">
+                    <h3>⚠️ Causes</h3>
+                    <ul>
+                        <li>Overflowing landfills and garbage dumps.</li>
+                        <li>Excessive use of chemical pesticides.</li>
+                        <li>Improper disposal of electronic waste.</li>
+                        <li>Oil spills in the Albertine region.</li>
+                    </ul>
+                </div>
+                <div class="pollution-col impact">
+                    <h3>💥 Impacts</h3>
+                    <ul>
+                        <li>Loss of soil fertility (lower crop yields).</li>
+                        <li>Soil erosion and landslides (e.g., Bududa).</li>
+                        <li>Toxic chemicals entering the food chain.</li>
+                        <li>Unsightly heaps of rubbish.</li>
+                    </ul>
+                </div>
+                <div class="pollution-col solution">
+                    <h3>✅ Solutions</h3>
+                    <ul>
+                        <li>Practice composting organic waste.</li>
+                        <li>Switch to organic farming.</li>
+                        <li>Recycle and reuse materials.</li>
+                        <li>Reforestation to hold soil together.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- FAQ Hero -->
+    <section id="FAQs">
+        <div class="container">
+           <h2>FAQs</h2>
+            <p>Got questions about Uganda’s environment, resource efficiency, pollution, or how you can make a difference? We’ve got answers.</p>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-grid" id="faqContainer">
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>1. What are the main environmental challenges facing Uganda today?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Uganda faces several urgent environmental threats including:</p>
+                        <ul>
+                            <li><strong>Deforestation:</strong> Over 200,000 hectares of forest lost annually due to charcoal burning and agricultural expansion.</li>
+                            <li><strong>Air pollution:</strong> PM2.5 levels (50 µg/m³) far exceed WHO safe limits, mainly from old vehicles and biomass burning.</li>
+                            <li><strong>Water contamination:</strong> 47% of water sources are polluted by industrial waste, sewage, and plastic (kaveera).</li>
+                            <li><strong>Land degradation:</strong> Nearly 46% of land is degraded, causing low crop yields and landslides (e.g., Bududa).</li>
+                        </ul>
+                        <p>Eco Safe Nation works on all fronts to raise awareness and drive community-led solutions.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>2. How does water pollution affect communities in Uganda?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Polluted water directly impacts health, economy, and daily life. Common consequences include:</p>
+                        <ul>
+                            <li>Outbreaks of waterborne diseases such as cholera, typhoid, and dysentery – leading causes of child mortality.</li>
+                            <li>High costs for water treatment and scarcity of safe drinking water in rural areas.</li>
+                            <li>Death of fish and aquatic species, threatening the livelihoods of fishing communities along Lake Victoria and the Nile.</li>
+                            <li>Loss of tourism revenue due to polluted beaches and floating plastic waste.</li>
+                        </ul>
+                        <p>Our clean-up campaigns and advocacy for plastic bans aim to restore Uganda’s water bodies.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>3. What is "efficient resource utilization" and why does it matter?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Efficient resource utilization means using natural resources (water, forests, soil, energy) wisely without waste or overexploitation. In Uganda, this includes:</p>
+                        <ul>
+                            <li><strong>Renewable energy:</strong> Switching from charcoal to solar and biogas to protect forests and reduce indoor air pollution.</li>
+                            <li><strong>Sustainable farming:</strong> Using crop rotation, mulching, and organic manure instead of harmful chemicals to preserve soil fertility.</li>
+                            <li><strong>Rainwater harvesting:</strong> Collecting rain reduces stress on Lake Victoria and ensures water during dry seasons.</li>
+                        </ul>
+                        <p>Efficient use ensures future generations can also thrive from Uganda’s natural wealth. <a href="index.html#utilization">Learn more in our Utilization section →</a></p>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>4. How can ordinary citizens help reduce air pollution in Kampala and other cities?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Every Ugandan can take simple but powerful actions:</p>
+                        <ul>
+                            <li><strong>Walk, bike, or use public transport</strong> – fewer boda-bodas and old cars on the road reduce harmful emissions.</li>
+                            <li><strong>Switch to energy-saving cookstoves</strong> and avoid burning waste (especially plastics).</li>
+                            <li><strong>Plant trees along streets and homesteads</strong> – trees absorb pollutants and provide shade.</li>
+                            <li><strong>Report open burning of garbage</strong> to local authorities and support campaigns for electric mobility.</li>
+                        </ul>
+                        <p>Eco Safe Nation organizes awareness workshops and tree-planting events — <a href="index.html#contact">join us</a> to make a difference.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>5. What community initiatives does Eco Safe Nation support?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We believe local action drives lasting change. Our key community programs include:</p>
+                        <ul>
+                            <li><strong>Youth Conservation Clubs:</strong> Environmental education in primary & secondary schools across Gulu, Kampala, and Jinja.</li>
+                            <li><strong>Women’s Green Groups:</strong> Training in briquette-making, organic farming, and upcycling waste to reduce deforestation and poverty.</li>
+                            <li><strong>Clean-up campaigns:</strong> Monthly clean-ups of drainage channels, markets, and Lake Victoria shores.</li>
+                            <li><strong>Eco-tourism advocacy:</strong> Helping local communities benefit from gorilla and bird conservation while protecting biodiversity.</li>
+                        </ul>
+                        <p>Interested in starting a club in your area? <a href="index.html#contact">Contact our team →</a></p>
+                    </div>
+                </div>
+
+                <!-- FAQ 6 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>6. Are there any government policies addressing pollution in Uganda?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, Uganda has several environmental laws, though enforcement remains a challenge. Key policies include:</p>
+                        <ul>
+                            <li><strong>The National Environment Act, 2019</strong> – provides for NEMA (National Environment Management Authority) to regulate pollution and waste.</li>
+                            <li><strong>Ban on single-use plastics (kaveera)</strong> – though still poorly enforced, efforts to revive the ban are ongoing.</li>
+                            <li><strong>Uganda Green Growth Development Strategy</strong> – aims to promote renewable energy, sustainable agriculture, and clean production.</li>
+                            <li><strong>Wetlands protection regulations</strong> – restrict encroachment and dumping in critical ecosystems.</li>
+                        </ul>
+                        <p>Eco Safe Nation works with local councils and NEMA to strengthen community oversight and reporting mechanisms.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 7 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>7. How can I donate or volunteer for Eco Safe Nation?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We welcome both financial support and hands-on volunteering! Options include:</p>
+                        <ul>
+                            <li><strong>Volunteer:</strong> Join our community outreach, tree planting, or educational workshops in Gulu and Kampala.</li>
+                            <li><strong>Donate:</strong> Contributions go toward clean-up equipment, tree seedlings, and training materials for rural women groups.</li>
+                            <li><strong>Partner:</strong> Schools, companies, and NGOs can collaborate on specific projects like waste recycling or school eco-clubs.</li>
+                        </ul>
+                        <p>Reach out via the <a href="index.html#contact">contact form</a> or email <strong>ecosafenationug@gmail.com</strong>. Together we restore Uganda's natural heritage.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 8 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>8. How does land pollution affect agriculture and food security?</h3>
+                     </div>
+                    <div class="faq-answer">
+                        <p>Land and soil pollution is a silent crisis for Uganda’s mainly agricultural economy. Consequences include:</p>
+                        <ul>
+                            <li>Loss of soil fertility from chemical overuse and erosion – leading to reduced yields of matooke, maize, and coffee.</li>
+                            <li>Contamination of crops with heavy metals (from e-waste dumps and industrial runoff), posing health risks.</li>
+                            <li>Landslides in highland areas (e.g., Bududa, Elgon region) due to deforestation and poor land management.</li>
+                            <li>Economic loss: land degradation costs Uganda roughly 17% of GDP annually (UN report).</li>
+                        </ul>
+                        <p>Our solutions promote composting, agroforestry, and responsible waste disposal to restore soil health.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 9 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>9. What is Uganda’s biodiversity importance and how is it threatened?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Uganda is a global biodiversity hotspot, home to 53.9% of the world’s remaining mountain gorillas, over 1,000 bird species, and countless unique plants. However, threats are severe:</p>
+                        <ul>
+                            <li><strong>Habitat destruction</strong> due to agricultural expansion, illegal logging, and settlement encroachment.</li>
+                            <li><strong>Poaching & wildlife trafficking</strong> – affecting gorillas, elephants, and chimpanzees.</li>
+                            <li><strong>Climate change</strong> – altering rainfall patterns and affecting migratory bird routes.</li>
+                        </ul>
+                        <p>Eco Safe Nation promotes eco-tourism that directly funds conservation and gives communities economic incentives to protect wildlife.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 10 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>10. How can schools and students get involved?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Students are powerful agents of change! Schools can participate through:</p>
+                        <ul>
+                            <li>Forming an Eco Club to lead recycling, tree planting, and waste segregation on campus.</li>
+                            <li>Inviting our team for environmental talks and documentary screenings.</li>
+                            <li>Competing in the annual “Green Schools” competition (posters, essays, and cleanest compound awards).</li>
+                            <li>Conducting mini-research projects on local pollution sources (air/water quality tests).</li>
+                        </ul>
+                        <p>Contact us to request a starter kit for your school club — together we raise an eco-conscious generation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to action banner -->
+            <div class="cta-box">
+                <h3>Still have a question?</h3>
+                <p>Our team is happy to provide more details about our campaigns, volunteer opportunities, or environmental data.</p>
+                <a href="index.html#contact" class="btn">📬 Ask us directly</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. CONTACT SECTION -->
+    <section id="contact" style="background-color: var(--bg-gray);">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>Join the movement. Send us a message to get involved.</p>
+
+            <div class="contact-box">
+                <form onsubmit="event.preventDefault(); alert('Thank you ' + this.name.value + '! We have received your message.');">
+                    <div class="form-group">
+                        <label style="display:block; margin-bottom:5px; font-weight:bold;">Name</label>
+                        <input type="text" name="name" required placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label style="display:block; margin-bottom:5px; font-weight:bold;">Email</label>
+                        <input type="email" required placeholder="Your Email">
+                    </div>
+                    <div class="form-group">
+                        <label style="display:block; margin-bottom:5px; font-weight:bold;">Message</label>
+                        <textarea rows="4" required placeholder="How can you help?"></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width:100%; border:none; cursor:pointer;">Send Message</button>               
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Eco Safe Nation</h4>
+                    <p>Dedicated to restoring environmental balance in Uganda through education, action, and sustainable community development.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#resources">Resources</a></li>
+                        <li><a href="#utilization">utilization</a></li>
+                        <li><a href="#community">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact info</h4>
+                    <ul>
+                        <p><strong>Founder:</strong> OLARA McJEREMY</p>
+                        <p><strong>Email:</strong> ecosafenationug@gmail.com</p>
+                        <p><strong>Phone:</strong> +256 782 912 218</p>
+                        <p><strong>Address:</strong> Gulu, Uganda</p>  
+                    </ul>
+                    <div style="margin-top: 1rem;">
+                        <a href="#" style="margin-right: 10px;">Facebook</a>
+                        <a href="#" style="margin-right: 10px;">Twitter</a>
+                        <a href="#">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Eco Safe Nation. Founded by OLARA McJEREMY. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Minimal JavaScript for Mobile Menu -->
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+
+        // Optional: Add a scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
+            } else {
+                header.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)";
+            }
+        });
+    </script>
+</body>
+</html>
